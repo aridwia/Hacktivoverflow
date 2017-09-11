@@ -27,4 +27,12 @@ var getall = function(req,res) {
   })
 }
 
-module.exports = {create,getall};
+var getOne = function(req,res) {
+  question.findById(req.params.id)
+  .then(data => {
+    res.send(data)
+  })
+}
+
+
+module.exports = {create,getall,getOne};

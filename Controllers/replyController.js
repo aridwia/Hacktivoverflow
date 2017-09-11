@@ -1,13 +1,14 @@
-const question = require('../models/question');
-const reply = require('../models/reply');
+const question = require('../models/Question');
+const reply = require('../models/Reply');
 
-var create = function(req,res) {
-  let newReply = new Reply({
-    replyContent: req.body.replyContent,
+var createReply = function(req,res) {
+  let newReply = new reply({
+    replyContent: req.body.isi,
     createdby: req.body.createdby,
     parents: req.params.id,
     createdAt: new Date()
   })
+  console.log("ini new reply",newReply);
   newReply.save((err, createdReply) => {
     if(err) {
       res.send(err)
@@ -22,9 +23,8 @@ var create = function(req,res) {
             }
           })
         })
-      })
     }
   })
 }
 
-module.exports = {create};
+module.exports = {createReply};

@@ -14,7 +14,7 @@ var login = function(req,res,next){
             id: user._id,
             email: user.email
           }, process.env.SECRET_TOKEN)
-        res.send({token:token})
+        res.send({isitoken:token})
       } else {
         res.send("salah password")
       }
@@ -26,4 +26,14 @@ var login = function(req,res,next){
   })
 }
 
-module.exports = {login};
+var cek = function(req,res,next){
+  var decode = jwt.verify(req.headers.token,process.env.SECRET_TOKEN)
+  if(decode.username =! undefined ){
+    next()
+  } else {
+    res.send("anda bukan admin")
+  }
+}
+
+
+module.exports = {login,cek};
