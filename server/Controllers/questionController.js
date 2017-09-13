@@ -4,7 +4,7 @@ var create = function(req,res){
   let newQuestion = new question({
     title: req.body.title,
     content: req.body.content,
-    createdby: req.body.creator,
+    createdby: req.body.createdby,
     createdAt: new Date()
   })
   newQuestion.save((err, createdQuestion) => {

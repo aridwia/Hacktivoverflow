@@ -27,4 +27,23 @@ var createReply = function(req,res) {
   })
 }
 
-module.exports = {createReply};
+// var get = function(req, res) {
+//   reply.find({ parent: req.params.id })
+//   .populate('createdby')
+//   .then(data => {
+//       res.send(data)
+//     })
+//     .catch(err => {
+//       res.send(err)
+//     })
+// }
+
+var get = function(req, res) {
+  reply.find({ parent: req.params.id })
+  .populate('createdby')
+  .exec(function (err, responses) {
+    res.send(err ? err : responses)
+  })
+}
+
+module.exports = {createReply,get};
