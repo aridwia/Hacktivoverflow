@@ -14,7 +14,7 @@ router.delete('/:id', helpersAuthenticate.islogin, questController.deletequestio
 router.delete('/:id/:id', questController.deleteanswer)
 
 //reply
-router.post('/:id/reply', replyController.createReply)
+router.post('/:id/reply', helpersAuthenticate.islogin, replyController.createReply)
 router.get('/:id/reply', replyController.get)
 router.get('/reply/:id', replyController.getall)
 router.delete('reply/:id', replyController.deletereply)

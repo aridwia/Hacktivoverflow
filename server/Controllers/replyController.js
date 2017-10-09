@@ -28,12 +28,14 @@ const reply = require('../models/Reply');
 // }
 
 var createReply = (req,res) => {
+  var id = req.id
   question.findById({_id: req.params.id})
   .then(dataquestion => {
+    console.log('masuk sini', req.id);
     reply.create({
-      replyContent: req.body.isi,
-      createdby: req.body.createdby,
+      replyContent: req.body.replycontent,
       thequestion: req.params.id,
+      createdby: req.id,
       createdAt: new Date()
     })
     .then(datareply => {
@@ -70,6 +72,7 @@ var get = function(req, res) {
 
 var getall = (req,res) => {
   reply.find({_id: req.params.id})
+  .populate('createdby')
   .then(datareply => {
     res.send(datareply)
   })

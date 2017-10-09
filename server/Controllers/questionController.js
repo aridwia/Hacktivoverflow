@@ -20,6 +20,7 @@ var create = function(req,res){
 var getall = function(req,res) {
   question.find({})
   .populate('answer')
+  .populate('createdby')
   .then(question => {
     res.send(question)
   })
@@ -62,13 +63,25 @@ var updatequestion = (req,res) => {
 }
 
 var deletequestion = (req,res) => {
-  question.deleteOne({_id: req.params.id})
-  .then(data => {
-    res.send(data)
-  })
-  .catch(err => {
-    res.send(err)
-  })
+  question.findById({_id: req.params.id})
+    .then(dataquest => {
+      console.log('ini dataquest', dataquest);
+      console.log('ini reqid', req.id);
+      if(dataquest.createdby == req.id){
+          question.deleteOne({_id: dataquest._id})
+          .then(data => {
+            res.send(data)
+          })
+          .catch(err => {
+            res.send(err)
+          })
+        } else {
+          res.send('you don/t have authorized')
+        }
+      })
+    .catch(err => {
+      res.send(err)
+    })
 }
 
 var deleteanswer = (req,res) => {
