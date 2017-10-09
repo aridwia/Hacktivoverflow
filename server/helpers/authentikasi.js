@@ -7,7 +7,7 @@ var islogin = (req,res,next) => {
       req.id = decoded.id
       req.username = decoded.username
       req.email = decoded.email
-      console.log(req);
+      // console.log(req);
       next()
     } else {
       res.send(err)

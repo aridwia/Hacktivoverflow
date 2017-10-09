@@ -36,15 +36,27 @@ var getOne = function(req,res) {
 }
 
 var updatequestion = (req,res) => {
-  question.updateOne({_id: req.params.id})
+  question.findById({_id: req.params.id})
   .then(data => {
-    console.log(data);
-    title= req.body.title,
-    content= req.body.content,
-    createdby= data.createdby,
-    createdAt= new Date()
+    if(data.createdby == req.id){
+    // console.log('datacratedby', data.createdby);
+    // console.log('req.id', req.id);
+      data.title= req.body.title,
+      data.content= req.body.content,
+      data.createdby= data.createdby,
+      data.createdAt= new Date(),
+      data.save((err,updatequest) => {
+        if(err) {
+          res.send(err)
+        } else {
+          res.send(updatequest)
+          console.log(updatequest);
+        }
+      })
+    }
   })
   .catch(err => {
+    console.log('masuk sini');
     res.send(err)
   })
 }

@@ -9,7 +9,7 @@ const router = express.Router();
 router.post('/', helpersAuthenticate.islogin, questController.create)
 router.get('/', questController.getall)
 router.get('/:id', questController.getOne)
-router.put('/:id',  questController.updatequestion)
+router.put('/:id',  helpersAuthenticate.islogin, questController.updatequestion)
 router.delete('/:id', helpersAuthenticate.islogin, questController.deletequestion)
 router.delete('/:id/:id', questController.deleteanswer)
 
