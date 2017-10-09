@@ -87,9 +87,19 @@ var deletequestion = (req,res) => {
 var deleteanswer = (req,res) => {
   question.findById({_id: req.params.id})
   .then(dataquestion => {
-    reply.deleteOne({_id: req.params.id})
-    .then(deleteanswer => {
-      res.send("masuk delete user")
+    reply.findById({_id: req.params.id})
+    .then(dataanswer => {
+      if(dataanswer.createdby == req.id){
+        reply.deleteOne({_id: dataanswer._id})
+        .then(data => {
+          res.send(data)
+        })
+        .catch(err => {
+          res.send(err)
+        })
+      } else {
+        console.log('bukan jawaban mu');
+      }
     })
     .catch(err => {
       res.send(err)
