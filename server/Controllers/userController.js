@@ -2,33 +2,84 @@ const bcrypt = require('bcrypt');
 var salt = bcrypt.genSaltSync(10);
 require('dotenv').config()
 var jwt = require('jsonwebtoken');
-const users = require('../models/User');
+const user = require('../models/User');
 
 
-var getall = function(req,res){
-  users.find()
-  .then(user => {
-    res.send(user)
+var signUp = (req,res) => {
+  var hash = bcrypt.hashSync(req.body.password,salt)
+  user.create({
+    username: req.body.username,
+    password: hash,
+    email:req.body.email
+  })
+  .then(dataUser => {
+    res.send(dataUser)
   })
   .catch(err => {
     res.send(err)
   })
 }
 
-var signUp = function(req,res){
-  var hash = bcrypt.hashSync(req.body.password, salt)
-  let newUser = new users ({
-    name : req.body.name,
-    password : hash,
-    email : req.body.email
+var getalluser = (req,res) => {
+  user.find({})
+  .then(alluser => {
+    res.send(alluser)
   })
-  newUser.save((err,creatdUser) => {
-    if(err) {
-      res.send(err)
-    } else {
-      res.send(creatdUser)
-    }
+  .catch(err => {
+    res.send(err)
   })
 }
 
-module.exports = {getall,signUp};
+var updateUser = (req,res) => {
+  var hash = bcrypt.hashSync(req.body.password, hash)
+  user.updateOne({
+    _id: req.params.id
+  },{
+    username: req.body.username,
+    password: hash,
+    email:req.body.email
+  })
+  .then(user => {
+    res.send(user)
+  })
+  .catch(err => {
+    res.sed(err)
+  })
+}
+
+var deleteUser = (req,res) => {
+  user.deleteOne({
+    _id: req.params.id
+  })
+  .then(data => {
+    res.send(data)
+  })
+  .catch(err => {
+    res.send(err)
+  })
+}
+
+var signIn = (req,res) => {
+  user.findOne({
+    username: req.body.username
+  })
+  .then(datauser => {
+    console.log('datauser', datauser);
+    // res.send(datauser)
+    if(bcrypt.compareSync(req.body.password,datauser.password)){
+      var token = jwt.sign({
+        username: datauser.username,
+        email: datauser.email,
+        id: datauser._id
+      },process.env.SECRET_TOKEN)
+      // res.send(datauser)
+      console.log(token);
+    res.send({msg: "berhasil login",token: token})
+  } else { res.send({msg: "password anda salah"})}
+  })
+  .catch(err => {
+    res.send(err)
+  })
+
+}
+module.exports = {signUp,getalluser,updateUser,deleteUser,signIn};
