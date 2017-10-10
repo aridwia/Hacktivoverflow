@@ -9,7 +9,8 @@ const http = axios.create({
 Vue.use(Vuex)
 
 const state = {
-  questions: []
+  questions: [],
+  user: []
 }
 
 const mutations = {
@@ -20,6 +21,26 @@ const mutations = {
   savequestion (state, payload) {
     console.log('question buat di save', payload)
     state.questions.push(payload)
+  },
+  saveuser (state, payload) {
+    console.log('user buat di save', payload)
+    state.user = payload
+  },
+  deletequestion (state, payload) {
+    // cara kedua
+    console.log('ini isi payload', payload)
+    var filteredQustion = state.questions.filter((quest) => quest._id !== payload)
+    console.log('ini state sebelum di hapus', state.questions)
+    state.questions = filteredQustion
+    console.log('ini state setelah di filter', state.questions)
+    // cara pertama
+    // console.log('id artikel yang mau di hapus', payload)
+    // const idx = state.questions.findIndex((question) => (question._id === payload))
+    // console.log(idx)
+    // state.questions.splice(idx, 1)
+  },
+  editquestion (state, payload) {
+
   }
 }
 
@@ -34,12 +55,52 @@ const actions = {
   },
   submitQuestion ({commit}, newquestion) {
     console.log('ini new question', newquestion)
-    http.post('/question', newquestion)
+    var config = {
+      headers: {'token': localStorage.getItem('token')}
+    }
+    http.post('/question', newquestion, config)
     .then(({data}) => {
       console.log('data hasil submit question')
-      commit('saveQuestion', data)
+      commit('savequestion', data)
     })
     .catch(err => console.error(err))
+  },
+  submitUser ({commit}, newuser) {
+    console.log('ini new user', newuser)
+    http.post('/users/signup', newuser)
+    .then(({data}) => {
+      console.log('data hasil submit user')
+      commit('saveuser', data)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  },
+  deletequestion ({commit}, questionid) {
+    console.log('ini id delete', questionid)
+    var config = {
+      headers: {'token': localStorage.getItem('token')}
+    }
+    http.delete(`/question/${questionid}`, config)
+    .then(({data}) => {
+      console.log('data berhasil di delete', data)
+      commit('deletequestion', questionid)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  },
+  editquestion ({commit}, updatequestion) {
+    // console.log('ini id quest edit', questionid)
+    console.log('ini updatequestion', updatequestion)
+    var config = {
+      headers: {'token': localStorage.getItem('token')}
+    }
+    http.put(`/question/${updatequestion._id}`, updatequestion, config)
+    .then(({data}) => {
+      console.log('data updated', data)
+      // commit(`editquestion`, questionid)
+    })
   }
 }
 
@@ -50,3 +111,15 @@ const store = new Vuex.Store({
 })
 
 export default store
+
+// login ({commit}, user) {
+//   console.log('ini user', user)
+//   http.post('/users/signin', user)
+//   .the(({data}) => {
+//     console.log('data hasil login')
+//     commit()
+//   })
+// }
+// },
+// datalogin (state, payload) {
+//   console.log('data hasil login', payload)

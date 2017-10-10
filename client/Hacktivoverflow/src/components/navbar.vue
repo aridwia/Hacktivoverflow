@@ -1,6 +1,30 @@
 <template lang="html">
   <div class="home">
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Hacktivoverflow</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Home</a></li>
+          <!-- <li><a href="#">Page 1</a></li>
+          <li><a href="#">Page 2</a></li> -->
+        </ul>
+        <form class="navbar-form navbar-left">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search">
+            <div class="input-group-btn">
+              <button class="btn btn-default" type="submit">
+                <i class="glyphicon glyphicon-search"></i>
+              </button>
+            </div>
+          </div>
+          <button @click="logout" type="submit" class="btn btn-default">Logout</button>
+        </form>
+      </div>
+    </nav>
+
+    <!-- <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -20,8 +44,10 @@
               </div>
               <button type="submit" class="btn btn-default">Submit</button>
             </form></li>
+            <li><button @click="logout" type="submit" name="button">Logout</button></li>
           </ul>
-        </div>
+        </div> -->
+
       </div>
     </nav>
   </div>
@@ -29,6 +55,12 @@
 
 <script>
 export default {
+  methods: {
+    logout () {
+      localStorage.removeItem('token')
+      this.$router.push('/')
+    }
+  }
 }
 </script>
 
