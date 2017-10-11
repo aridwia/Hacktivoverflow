@@ -31,8 +31,13 @@ var getall = function(req,res) {
 
 var getOne = function(req,res) {
   question.findById(req.params.id)
+  .populate('answer')
+  .populate('createdby')
   .then(data => {
     res.send(data)
+  })
+  .catch(err => {
+    res.send(err)
   })
 }
 
