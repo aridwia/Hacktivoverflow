@@ -3,7 +3,9 @@
     <div class="container">
       <div class="panel panel-success">
         <div class="panel-heading">
-          <h3 class="panel-title">{{onequestion.title}}</h3>
+          <h3 class="panel-title">  <p class="text-center">{{onequestion.title}}</p>
+            <span class="badge badge-pill badge-default">createdby :  {{onequestion.createdby.username}} </span>
+            <span class="badge badge-pill badge-warning">{{onequestion.createdAt}}</span></h3>
         </div>
         <div class="panel-body">
           {{onequestion.content}}
@@ -56,13 +58,14 @@
       <div class="panel panel-primary" v-for = "ans in onequestion.answer">
           <div class="panel-heading">
             {{ans.createdby.username}}
+          <span class="badge badge-pill badge-warning">{{ans.createdAt}}</span></h3>
           </div>
           <div class="panel-body">
             {{ans.replyContent}}
           </div>
           <div class="panel-footer">
             <button  type="button" class="btn btn-warning btn-sm glyphicon glyphicon-pencil" data-toggle="modal" data-target="#"> Edit</button>
-            <button  class=" btn btn-danger btn-sm glyphicon glyphicon-trash" type="submit"> Delete</button>
+            <button  class=" btn btn-danger btn-sm glyphicon glyphicon-trash" type="button" @click="deleteanswer(ans._id)"> Delete</button>
           </div>
       </div>
 
@@ -91,7 +94,7 @@ export default {
   },
   methods: {
     ...mapActions([
-      'submitreply', 'getonequestion'
+      'submitreply', 'getonequestion', 'deleteanswer'
     ]),
     operedit (id) {
       this.questionreply = id

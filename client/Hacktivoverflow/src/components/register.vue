@@ -13,7 +13,7 @@
       <label class="control-label" for="focusedInput">Email</label>
       <input class="form-control"  type="text" v-model="login.email">
     </div>
-    <button @click="submitUser(login), pindah()" class="btn btn-primary" type="submit" name="button">Register</button>
+    <button @click="submitUser(login), pindah()" class="btn btn-primary" type="button" name="button">Register</button>
   </div>
 </div>
 </template>

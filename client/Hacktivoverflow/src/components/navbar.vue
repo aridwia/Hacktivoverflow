@@ -3,10 +3,10 @@
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">Hacktivoverflow</a>
+          <a class="navbar-brand" href="/index">Hacktivoverflow</a>
         </div>
         <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home</a></li>
+          <li class="active"><a href="/index">Home</a></li>
           <!-- <li><a href="#">Page 1</a></li>
           <li><a href="#">Page 2</a></li> -->
         </ul>
@@ -14,12 +14,12 @@
           <div class="input-group">
             <input type="text" class="form-control" placeholder="Search">
             <div class="input-group-btn">
-              <button class="btn btn-default" type="submit">
+              <button class="btn btn-default" type="button">
                 <i class="glyphicon glyphicon-search"></i>
               </button>
             </div>
           </div>
-          <button @click="logout" type="submit" class="btn btn-default">Logout</button>
+          <button @click="logout" type="button" class="btn btn-default">Logout</button>
         </form>
       </div>
     </nav>

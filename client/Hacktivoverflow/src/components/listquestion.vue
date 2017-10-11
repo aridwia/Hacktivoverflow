@@ -32,7 +32,7 @@
                     </div>
                   </div>
 
-                  <button @click="submitQuestion(formQuestion,config)" type="submit" data-dismiss="modal" class="btn btn-primary">Post</button>
+                  <button @click="submitQuestion(formQuestion,config)" type="button" data-dismiss="modal" class="btn btn-primary">Post</button>
               </form>
             </div>
             <div class="modal-footer">
@@ -49,15 +49,17 @@
     <div v-for='q in questions'>
       <div class="panel panel-success">
         <div class="panel-heading">
-          {{q.title}}
+          <p class="text-center">{{q.title}}</p>
+          <span class="badge badge-pill badge-default">createdby :  {{q.createdby.username}} </span>
+          <span class="badge badge-pill badge-warning">{{q.createdAt}}</span>
         </div>
         <div class="panel-body">
           {{q.content}}
         </div>
         <div class="panel-footer">
-            <router-link :to="'/index/'+ q._id"><button class=" btn btn-default btn-sm glyphicon glyphicon-list-alt" type="submit"> Details</button></router-link>
+            <router-link :to="'/index/'+ q._id"><button class=" btn btn-default btn-sm glyphicon glyphicon-list-alt" type="button"> Details</button></router-link>
             <button @click="operedit(q)" type="button" class="btn btn-warning btn-sm glyphicon glyphicon-pencil" data-toggle="modal" data-target="#editquestion"> Edit</button>
-            <button @click="deletequestion(q._id)" class=" btn btn-danger btn-sm glyphicon glyphicon-trash"  type="submit"> Delete</button>
+            <button @click="deletequestion(q._id)" class=" btn btn-danger btn-sm glyphicon glyphicon-trash"  type="button"> Delete</button>
         </div>
 
       </div>

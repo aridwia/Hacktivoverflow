@@ -16,7 +16,7 @@
           </div>
         </div>
         <button @click="login(formlogin)" class="btn btn-primary" type="button" name="button">Login</button>
-        <button @click="register()" class="btn btn-danger" type="submit" name="button">Register</button>
+        <button @click="register()" class="btn btn-danger" type="button" name="button">Register</button>
       </fieldset>
     </form>
   </div>

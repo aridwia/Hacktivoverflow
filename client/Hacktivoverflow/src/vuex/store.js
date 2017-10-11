@@ -51,6 +51,13 @@ const mutations = {
   saveanswer (state, payload) {
     console.log('answer buat di push ke answer question', payload)
     state.onequestion.answer.push(payload)
+  },
+  setidreplydelete (state, payload) {
+    console.log('id reply buat di delete di satate', payload)
+    var filteredReply = state.onequestion.answer.filter((answ) => answ._id !== payload)
+    console.log('ini state sebelum di hapus', state.onequestion.answer)
+    state.onequestion.answer = filteredReply
+    console.log('ini state setelah di filter', state.onequestion.answer)
   }
 }
 
@@ -136,6 +143,20 @@ const actions = {
     .then(({data}) => {
       console.log('ini data', data)
       commit('setonequestion', data)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  },
+  deleteanswer ({commit}, id) {
+    console.log('ini id nya delete reply', id)
+    var config = {
+      headers: {'token': localStorage.getItem('token')}
+    }
+    http.delete(`/reply/` + id, config)
+    .then(({data}) => {
+      console.log('ini data', data)
+      commit('setidreplydelete', id)
     })
     .catch(err => {
       console.log(err)
