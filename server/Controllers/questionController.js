@@ -32,9 +32,13 @@ var getall = function(req,res) {
 var getOne = function(req,res) {
   question.findById(req.params.id)
   .populate('answer')
-  .populate('createdby')
+  .populate({
+    path: 'answer',
+    populate: {
+      path: 'createdby'
+    }
+  })
   .then(data => {
-    data.populate('createdby')
     res.send(data)
   })
   .catch(err => {
