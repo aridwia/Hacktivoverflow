@@ -14,6 +14,8 @@ const userSchema = new Schema({
     type: String,
     required: [true, 'email harus di isi']
   }
+},{
+  timestamps: true
 })
 
 const User = mongoose.model('User', userSchema)

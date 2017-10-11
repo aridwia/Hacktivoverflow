@@ -46,8 +46,8 @@
 
     </div><br><br><br>
 
-    <div class="" v-for='q in questions'>
-      <div class="panel panel-default">
+    <div v-for='q in questions'>
+      <div class="panel panel-success">
         <div class="panel-heading">
           {{q.title}}
         </div>

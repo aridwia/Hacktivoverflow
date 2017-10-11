@@ -14,6 +14,8 @@ var questionSchema = new Schema({
   answer: [{type: Schema.Types.ObjectId, ref: 'Reply'}],
   thumbup: [{type: Schema.Types.ObjectId, ref: 'User'}],
   thumbdown: [{type: Schema.Types.ObjectId, ref: 'User'}]
+},{
+  timestamps: true
 })
 
 const Question = mongoose.model('Question', questionSchema);

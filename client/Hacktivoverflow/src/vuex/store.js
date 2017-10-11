@@ -3,14 +3,16 @@ import Vuex from 'vuex'
 import axios from 'axios'
 
 const http = axios.create({
-  baseURL: 'http://35.197.131.206'
+  // baseURL: 'http://35.197.131.206'
+  baseURL: 'http://localhost:3000'
 })
 
 Vue.use(Vuex)
 
 const state = {
   questions: [],
-  user: []
+  user: [],
+  onequestion: []
 }
 
 const mutations = {
@@ -41,6 +43,14 @@ const mutations = {
   },
   editquestion (state, payload) {
 
+  },
+  setonequestion (state, payload) {
+    console.log('data di mutation sebagai payload', payload)
+    state.onequestion = payload
+  },
+  saveanswer (state, payload) {
+    console.log('answer buat di push ke answer question', payload)
+    state.onequestion.answer.push(payload)
   }
 }
 
@@ -103,6 +113,32 @@ const actions = {
     })
     .catch(err => {
       console.log('andatidakpunyahak', err)
+    })
+  },
+  submitreply ({commit}, newreply) {
+    console.log('ini newreply', newreply.replycontent)
+    console.log('ini idquest', newreply.idquest)
+    var config = {
+      headers: {'token': localStorage.getItem('token')}
+    }
+    http.post(`/question/${newreply.idquest}/reply`, newreply, config)
+    .then(({data}) => {
+      console.log('input reply', data)
+      commit('saveanswer', data)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  },
+  getonequestion ({commit}, id) {
+    console.log('ini id nya', id)
+    http.get(`/question/` + id)
+    .then(({data}) => {
+      console.log('ini data', data)
+      commit('setonequestion', data)
+    })
+    .catch(err => {
+      console.log(err)
     })
   }
 }

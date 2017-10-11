@@ -9,6 +9,7 @@ mongoose.connect('mongodb://aridwia:aridwia23@cluster0-shard-00-00-dy2uu.mongodb
 var index = require('./routes/index');
 var users = require('./routes/users');
 var question = require('./routes/question');
+var reply = require('./routes/reply')
 
 var app = express();
 
@@ -18,6 +19,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/', index);
 app.use('/users', users);
 app.use('/question', question);
+app.use('/reply', reply);
 //
 // // catch 404 and forward to error handler
 // app.use(function(req, res, next) {

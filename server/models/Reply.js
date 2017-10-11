@@ -10,6 +10,8 @@ const replySchema = new Schema({
   createdby: {type: Schema.Types.ObjectId, ref: 'User'},
   thumbup: [{type: Schema.Types.ObjectId, ref: 'User'}],
   thumbdown: [{type: Schema.Types.ObjectId, ref: 'User'}]
+},{
+  timestamps: true
 })
 
 const Reply = mongoose.model('Reply', replySchema);

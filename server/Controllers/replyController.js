@@ -71,7 +71,7 @@ var get = function(req, res) {
 }
 
 var getall = (req,res) => {
-  reply.find({_id: req.params.id})
+  reply.find()
   .populate('createdby')
   .then(datareply => {
     res.send(datareply)
@@ -82,9 +82,19 @@ var getall = (req,res) => {
 }
 
 var deletereply = (req,res) => {
-  reply.deleteOne({_id: req.params.id})
-  .then(replydelted => {
-    res.send(replydelted)
+  reply.findOne({_id: req.params.id})
+  .then(datareply => {
+    console.log('ini datareply', datareply)
+    console.log('ini reqid',req.id);
+    if(datareply.createdby == req.id){
+      reply.deleteOne({_id: req.params.id})
+      .then(replydelted => {
+        res.send(replydelted)
+      })
+      .catch(err => {
+        res.send(err)
+      })
+    }
   })
   .catch(err => {
     res.send(err)
