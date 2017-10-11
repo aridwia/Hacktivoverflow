@@ -9,7 +9,7 @@
 
 
       <div class="panel panel-default" v-for = 'ans in question.answer'>
-        <div class="panel-heading">{{ans}}</div>
+        <div class="panel-heading"></div>
         <div class="panel-body">{{ans.replyContent}}</div>
       </div>
 
