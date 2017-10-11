@@ -30,8 +30,8 @@ var getall = function(req,res) {
 }
 
 var getOne = function(req,res) {
-  question.findById(req.params.id)
-  .populate('answer')
+  question.findOne({_id: req.params.id})
+  .populate('createdby')
   .populate({
     path: 'answer',
     populate: {
