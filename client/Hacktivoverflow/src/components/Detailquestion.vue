@@ -4,14 +4,14 @@
       <div class="panel panel-default">
         <div class="panel-heading">{{question.title}}</div>
         <div class="panel-body">{{question.content}}</div>
-{{question.answer}}
+{{question.answer[0].replyContent}}
       </div>
 
-<!--
-      <div class="panel panel-default" v-for=ans in question.answer>
-        <div class="panel-heading"></div>
-        <div class="panel-body">{{ans}}</div>
-      </div> -->
+
+      <div class="panel panel-default" v-for = 'ans in question.answer'>
+        <div class="panel-heading">{{ans}}</div>
+        <div class="panel-body">{{ans.replyContent}}</div>
+      </div>
 
     </div>
   </div>

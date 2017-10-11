@@ -34,6 +34,7 @@ var getOne = function(req,res) {
   .populate('answer')
   .populate('createdby')
   .then(data => {
+    .populate('createdby')
     res.send(data)
   })
   .catch(err => {
