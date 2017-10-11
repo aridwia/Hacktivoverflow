@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     login () {
-      axios.post(`http://localhost:3000/users/signin`, this.formlogin)
+      axios.post(`http://35.197.131.206/users/signin`, this.formlogin)
       .then(data => {
         console.log(data)
         localStorage.setItem('token', data.data.token)

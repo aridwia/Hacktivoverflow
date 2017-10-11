@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import axios from 'axios'
 
 const http = axios.create({
-  baseURL: 'http://localhost:3000'
+  baseURL: 'http://35.197.131.206'
 })
 
 Vue.use(Vuex)
@@ -100,6 +100,9 @@ const actions = {
     .then(({data}) => {
       console.log('data updated', data)
       // commit(`editquestion`, questionid)
+    })
+    .catch(err => {
+      console.log('andatidakpunyahak', err)
     })
   }
 }

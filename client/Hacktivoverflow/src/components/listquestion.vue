@@ -55,7 +55,7 @@
           {{q.content}}
         </div>
         <div class="panel-footer">
-            <router-link :to="'/detailquestion'"><button class=" btn btn-default btn-sm glyphicon glyphicon-list-alt" type="submit"> Details</button></router-link>
+            <router-link :to="'/index/'+ q._id"><button class=" btn btn-default btn-sm glyphicon glyphicon-list-alt" type="submit"> Details</button></router-link>
             <button @click="operedit(q)" type="button" class="btn btn-warning btn-sm glyphicon glyphicon-pencil" data-toggle="modal" data-target="#editquestion"> Edit</button>
             <button @click="deletequestion(q._id)" class=" btn btn-danger btn-sm glyphicon glyphicon-trash"  type="submit"> Delete</button>
         </div>
@@ -101,7 +101,7 @@
 
     </div>
   </div>
-
+<router-view></router-view>
   </div>
 </template>
 

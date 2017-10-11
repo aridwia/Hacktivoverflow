@@ -5,8 +5,10 @@
 </template>
 
 <script>
+import Detailquestion from '@/components/Detailquestion'
 export default {
-  name: 'app'
+  name: 'app',
+  components: Detailquestion
 }
 </script>
 

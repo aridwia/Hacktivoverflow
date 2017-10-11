@@ -4,6 +4,7 @@ import Home from '@/components/Home'
 import Login from '@/components/Login'
 import register from '@/components/register'
 import Detailquestion from '@/components/Detailquestion'
+import listquestion from '@/components/listquestion'
 
 Vue.use(Router)
 
@@ -20,11 +21,18 @@ export default new Router({
     },
     {
       path: '/index',
-      component: Home
-    },
-    {
-      path: '/detailquestion',
-      component: Detailquestion
+      component: Home,
+      children: [
+        {
+          path: '',
+          component: listquestion
+        },
+        {
+          path: ':id',
+          component: Detailquestion,
+          props: true
+        }
+      ]
     }
   ]
 })

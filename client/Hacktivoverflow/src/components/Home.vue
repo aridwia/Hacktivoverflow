@@ -1,14 +1,13 @@
 <template lang="html">
   <div class="">
     <navbar></navbar>
-    <listquestion/>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
 import navbar from '@/components/navbar'
-import listquestion from '@/components/listquestion'
+import Detailquestion from '@/components/Detailquestion'
 export default {
   data () {
     return {
@@ -17,13 +16,13 @@ export default {
   },
   components: {
     navbar,
-    listquestion
+    Detailquestion
   },
   methods: {
     ceklogin () {
       if (localStorage.token) {
         if (localStorage.token !== 'undefined') {
-          this.$router.push('/index')
+          return
         } else {
           this.$router.push('/')
         }
